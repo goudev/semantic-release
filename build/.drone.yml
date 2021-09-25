@@ -1,0 +1,54 @@
+kind: pipeline
+name: Projeto semantic-release
+type: docker
+platform:
+  arch: amd64
+  
+steps:
+- name: Publica Imagem Dev
+  image: plugins/docker
+  settings:
+    repo: ${DRONE_REPO,,}
+    dockerfile: build/Dockerfile.amd64
+    tags:
+    - ${DRONE_SEMVER}-amd64
+    - ${DRONE_SEMVER_MAJOR}-amd64
+    - ${DRONE_SEMVER_MAJOR}.${DRONE_SEMVER_MINOR}-amd64
+  when:
+    ref:
+      exclude: [ "refs/tags/v*-dev.*" ]
+    event:
+    - tag
+    
+steps:
+- name: Publica Imagem Release
+  image: plugins/docker
+  settings:
+    repo: ${DRONE_REPO,,}
+    dockerfile: build/Dockerfile.amd64
+    tags:
+    - ${DRONE_SEMVER}-amd64
+    - ${DRONE_SEMVER_MAJOR}-amd64
+    - ${DRONE_SEMVER_MAJOR}.${DRONE_SEMVER_MINOR}-amd64
+  when:
+    ref:
+      include: [ "refs/tags/v*-release.*" ]
+    event:
+    - tag
+
+steps:
+- name: Publica Imagem Master
+  image: plugins/docker
+  settings:
+    repo: ${DRONE_REPO,,}
+    dockerfile: build/Dockerfile.amd64
+    tags:
+    - ${DRONE_SEMVER}-amd64
+    - ${DRONE_SEMVER_MAJOR}-amd64
+    - ${DRONE_SEMVER_MAJOR}.${DRONE_SEMVER_MINOR}-amd64
+  when:
+    ref:
+      include: [ "refs/tags/v*" ]
+      exclude: [ "refs/tags/v*-release.*", "refs/tags/v*-dev.*" ]
+    event:
+    - tag
