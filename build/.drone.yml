@@ -3,6 +3,18 @@ name: Projeto semantic-release
 type: docker
 platform:
   arch: amd64
+
+- name: semantic-release
+  image: goudev/semantic-release:base
+  commands:
+  - semantic-release --ci
+  when:
+    ref:
+    - "refs/heads/dev"
+    - "refs/heads/master"
+    - "refs/heads/release"
+    event:
+    - push
   
 steps:
 - name: Publica Imagem Dev
@@ -12,8 +24,6 @@ steps:
     dockerfile: build/Dockerfile.amd64
     tags:
     - ${DRONE_SEMVER}-amd64
-    - ${DRONE_SEMVER_MAJOR}-amd64
-    - ${DRONE_SEMVER_MAJOR}.${DRONE_SEMVER_MINOR}-amd64
   when:
     ref:
       exclude: [ "refs/tags/v*-dev.*" ]
@@ -28,8 +38,6 @@ steps:
     dockerfile: build/Dockerfile.amd64
     tags:
     - ${DRONE_SEMVER}-amd64
-    - ${DRONE_SEMVER_MAJOR}-amd64
-    - ${DRONE_SEMVER_MAJOR}.${DRONE_SEMVER_MINOR}-amd64
   when:
     ref:
       include: [ "refs/tags/v*-release.*" ]
@@ -46,6 +54,7 @@ steps:
     - ${DRONE_SEMVER}-amd64
     - ${DRONE_SEMVER_MAJOR}-amd64
     - ${DRONE_SEMVER_MAJOR}.${DRONE_SEMVER_MINOR}-amd64
+    - latest
   when:
     ref:
       include: [ "refs/tags/v*" ]
