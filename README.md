@@ -67,7 +67,7 @@ docker run --rm \
 ```cmd
 git clone https://github.com/goudev/semantic-release.git
 ```
-
+Ac3ss@Dcoker.,12021
 ### Pré-requsitos
 
 * Docker
