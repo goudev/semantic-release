@@ -10,7 +10,7 @@ steps:
   commands:
   - semantic-release --ci
   environment:
-  - GH_TOKEN:
+    GH_TOKEN:
       from_secret: TOKEN_GITHUB
   when:
     ref:
