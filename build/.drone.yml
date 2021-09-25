@@ -4,6 +4,7 @@ type: docker
 platform:
   arch: amd64
 
+steps:
 - name: semantic-release
   image: goudev/semantic-release:base
   commands:
@@ -16,7 +17,6 @@ platform:
     event:
     - push
   
-steps:
 - name: Publica Imagem Dev
   image: plugins/docker
   settings:
@@ -30,7 +30,6 @@ steps:
     event:
     - tag
     
-steps:
 - name: Publica Imagem Release
   image: plugins/docker
   settings:
@@ -44,7 +43,6 @@ steps:
     event:
     - tag
 
-steps:
 - name: Publica Imagem Master
   image: plugins/docker
   settings:
