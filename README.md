@@ -65,7 +65,7 @@ docker run --rm \
 
 1. Clone do respositório:
 ```cmd
-git clone https://git.thema.inf.br/Imagens/semantic-release.git
+git clone https://github.com/goudev/semantic-release.git
 ```
 
 ### Pré-requsitos
