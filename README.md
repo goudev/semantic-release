@@ -54,7 +54,7 @@ docker run --rm \
   -e PLUGIN_BRANCH="master" \
   -v $(pwd):$(pwd) \
   -w $(pwd) \
-  docker-hub.thema.inf.br/imagens/semantic-release
+  goudev/semantic-release
 ```
 ### Construído com
 
