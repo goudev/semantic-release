@@ -9,6 +9,9 @@ steps:
   image: goudev/semantic-release:base
   commands:
   - semantic-release --ci
+  environment:
+  - GH_TOKEN:
+      from_secret: TOKEN_GITHUB
   when:
     ref:
     - "refs/heads/dev"

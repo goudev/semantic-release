@@ -13,6 +13,6 @@ RUN npm install -g semantic-release \
 @semantic-release/apm \
 conventional-changelog-conventionalcommits 
 COPY entrypoint.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh && apk add git
 ENTRYPOINT ["entrypoint.sh"]
 CMD [ "semantic-release", "--ci" ]
